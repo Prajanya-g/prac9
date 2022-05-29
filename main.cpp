@@ -20,9 +20,7 @@ int main(void){
     while (ss >> input)
     {   
         if(input <= "9" && input >= "0"){
-            if(stoi(input) > 99){
-            }
-            else{
+            if(stoi(input) <= 99){
                 countDigit++;
             }
         }

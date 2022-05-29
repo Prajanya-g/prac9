@@ -5,33 +5,36 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+using namespace std;
 
-bool expressionCheck(std::string input){
+
+int main(void){
+    stringstream ss;
+    string str;
+    getline(cin, str);
+    replace( str.begin(), str.end(), ',', ' ');
+    ss << str;
+    string input;
     int countDigit = 0;
     int countOperation = 0;
-    for (int i = 0; i < input.size(); i++)
-    {
-        if(input[i] <= '9' && input[i] >= '0'){
-            countDigit++;
+    while (ss >> input)
+    {   
+        if(input <= "9" && input >= "0"){
+            if(stoi(input) > 99){
+            }
+            else{
+                countDigit++;
+            }
         }
-        else{
+        else if(input == "+"|| input == "-" || input == "*" || input == "/"){
             countOperation++; 
         }
     }
-    if(countDigit == countOperation+1){
-        return true;
-    }
-    return false;
-}
-
-int main(void){
-    std::string str;
-    std::cin >> str;
-    if(expressionCheck(str) == true){
+     if(countDigit == countOperation+1){
         prefixSolver solver;
-        std::cout<< solver.solvePrefix(str)<<std::endl;
+        cout<< solver.solvePrefix(str)<<endl;
     }
     else{
-        std::cout<<"Error"<<std::endl;
+        cout<<"Error"<<endl;
     }
 }

@@ -4,16 +4,24 @@
 #include "prefixSolver.h"
 #include <iostream>
 #include <stack>
+#include <sstream>
+#include <algorithm>
 
 prefixSolver::prefixSolver(){
 }
 
-int solve(int a, int b, char op){
-    switch(op){
-        case '+': return a + b;
-        case '-': return a - b;
-        case '*': return a * b;
-        case '/': return a / b;
+int solve(int a, int b, std::string op){
+    if (op == "+"){
+        return a + b;
+    }
+    else if(op == "-"){
+        return a - b;
+    }
+    else if(op == "*"){
+        return a * b;
+    }
+    else if(op == "/"){
+        return a / b;
     }
     return 0;
 }
@@ -21,24 +29,30 @@ int solve(int a, int b, char op){
 int prefixSolver::solvePrefix(std::string expression){
     std::stack<std::string> infix;
     std::stack<int> result;
-    for (int index = expression.size()-1; index >= 0; index--) {
-        if (expression[index] == '+'||expression[index] == '-'||expression[index] == '*'||expression[index] == '/') {
+    std::stringstream ss;
+    std::reverse(expression.begin(),expression.end());
+    ss.str(expression);
+    std::string input;
+    while (ss >> input)
+    {    
+        if (input == "+"||input == "-"||input == "*"||input == "/") {
             std::string digitOne = infix.top();   
             infix.pop();
             std::string digitTwo = infix.top();   
             infix.pop();
-            std::string temp = "("+digitOne + expression[index] + digitTwo +")";
+            std::string temp = "("+digitOne + input + digitTwo +")";
             infix.push(temp);
             int val1 = result.top();   
             result.pop();
             int val2 = result.top();   
             result.pop();
-            int res = solve(val1,val2,expression[index]);
+            int res = solve(val1,val2,input);
             result.push(res);
         }
         else {
-            infix.push(std::string(1,expression[index]));
-            result.push(expression[index] - '0');
+            std::reverse(input.begin(),input.end());
+            infix.push(input);
+            result.push(stoi(input));
         }
     }
     std::cout<<infix.top()<< "=" << result.top() << std::endl; 

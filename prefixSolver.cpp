@@ -55,6 +55,6 @@ int prefixSolver::solvePrefix(std::string expression){
             result.push(stoi(input));
         }
     }
-    std::cout<<infix.top()<< "=" << result.top() << std::endl; 
+    std::cout<<infix.top()<< " = " << result.top() << std::endl; 
     return result.top();
 }

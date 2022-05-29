@@ -32,7 +32,7 @@ int main(void){
     }
      if(countDigit == countOperation+1){
         prefixSolver solver;
-        cout<< solver.solvePrefix(str)<<endl;
+        solver.solvePrefix(str);
     }
     else{
         cout<<"Error"<<endl;

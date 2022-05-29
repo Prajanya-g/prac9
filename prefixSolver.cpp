@@ -36,18 +36,28 @@ int prefixSolver::solvePrefix(std::string expression){
     std::string input;
     while (ss >> input)
     {    
-        if (input == "+"||input == "-"||input == "*"||input == "/") {
+        if (input == "+"||input == "-") {
             std::string digitOne = infix.top();   
             infix.pop();
             std::string digitTwo = infix.top();   
             infix.pop();
             std::string temp;
-            if(input == std::string(1,expression[expression.size()-1])){
-                temp = digitOne + input + digitTwo;
-            }
-            else{
-                temp = "("+digitOne + input + digitTwo +")";
-            }
+            temp = "("+digitOne + input + digitTwo +")";
+            infix.push(temp);
+            int val1 = result.top();   
+            result.pop();
+            int val2 = result.top();   
+            result.pop();
+            int res = solve(val1,val2,input);
+            result.push(res);
+        }
+        else if(input == "*"||input == "/"){
+            std::string digitOne = infix.top();   
+            infix.pop();
+            std::string digitTwo = infix.top();   
+            infix.pop();
+            std::string temp;
+            temp = digitOne + input + digitTwo;
             infix.push(temp);
             int val1 = result.top();   
             result.pop();

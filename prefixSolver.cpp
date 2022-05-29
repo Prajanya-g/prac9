@@ -41,7 +41,13 @@ int prefixSolver::solvePrefix(std::string expression){
             infix.pop();
             std::string digitTwo = infix.top();   
             infix.pop();
-            std::string temp = "("+digitOne + input + digitTwo +")";
+            std::string temp;
+            if(input == std::string(1,expression[expression.size()-1])){
+                temp = digitOne + input + digitTwo;
+            }
+            else{
+                temp = "("+digitOne + input + digitTwo +")";
+            }
             infix.push(temp);
             int val1 = result.top();   
             result.pop();

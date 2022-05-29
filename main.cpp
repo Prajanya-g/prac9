@@ -7,7 +7,6 @@
 #include <sstream>
 using namespace std;
 
-
 int main(void){
     stringstream ss;
     string str;
